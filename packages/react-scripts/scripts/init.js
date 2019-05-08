@@ -123,9 +123,12 @@ module.exports = function(
   }
 
   // Copy the files for the user
-  const templatePath = template
-    ? path.resolve(originalDirectory, template)
-    : path.join(ownPath, useTypeScript ? 'template-typescript' : 'template');
+  // const templatePath = template
+  //   ? path.resolve(originalDirectory, template)
+  //   : path.join(ownPath, useTypeScript ? 'template-typescript' : 'template');
+
+  const templatePath = 'template-edpuzzle';
+
   if (fs.existsSync(templatePath)) {
     fs.copySync(templatePath, appPath);
   } else {
