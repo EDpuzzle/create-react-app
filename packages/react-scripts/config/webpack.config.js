@@ -185,6 +185,7 @@ module.exports = function(webpackEnv) {
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
+    externals: { jquery: 'jQuery' },
     optimization: {
       minimize: isEnvProduction,
       minimizer: [
@@ -282,6 +283,47 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
+
+        /* ====================================================== */
+        /*                Edpuzzle Alias - START                  */
+        /* ====================================================== */
+
+        underscore: 'lodash',
+        backbone: path.join(__dirname, 'node_modules', 'backbone', 'backbone'),
+        'jquery.ui.widget': path.join(
+          __dirname,
+          'node_modules',
+          'blueimp-file-upload/js/vendor/jquery.ui.widget.js'
+        ),
+        Apps: path.resolve(__dirname, 'app/apps'),
+        Behaviors: path.resolve(__dirname, 'app/behaviors'),
+        Components: path.resolve(__dirname, 'app/components'),
+        Constants: path.resolve(__dirname, '../constants'),
+        Controllers: path.resolve(__dirname, 'app/controllers'),
+        Dependencies: path.resolve(__dirname, 'app/dependencies'),
+        Entities: path.resolve(__dirname, 'app/entities'),
+        Regions: path.resolve(__dirname, 'app/regions'),
+        Routers: path.resolve(__dirname, 'app/routers'),
+        Views: path.resolve(__dirname, 'app/views'),
+        ReactApp: path.resolve(__dirname, 'app_react/app'),
+        Modules: path.resolve(__dirname, 'app_react/modules'),
+        Middleware: path.resolve(__dirname, 'app_react/middleware'),
+        Pages: path.resolve(__dirname, 'app_react/pages'),
+        Store: path.resolve(__dirname, 'app_react/modules/store'),
+        Routes: path.resolve(__dirname, 'app_react/routes'),
+        // Shared
+        Constants: path.resolve(__dirname, '../constants.json'),
+        ClientApi: path.resolve(__dirname, 'api/api'),
+        Parsers$: path.resolve(__dirname, 'api/parsers.js'),
+        Parsers: path.resolve(__dirname, 'api/parsers'),
+        Helpers: path.resolve(__dirname, 'app/helpers'),
+        Libs: path.resolve(__dirname, 'lib'),
+        Loaders: path.resolve(__dirname, 'app/loaders'),
+        UI: path.resolve(__dirname, 'ui'),
+
+        /* ====================================================== */
+        /*                  Edpuzzle Alias - END                  */
+        /* ====================================================== */
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -500,6 +542,44 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+
+            /* ====================================================== */
+            /*              Edpuzzle Loaders - START                  */
+            /* ====================================================== */
+
+            {
+              test: /\.coffee$/,
+              loader: 'coffee-loader',
+              exclude: /node_modules/,
+              include: __dirname,
+            },
+            {
+              test: /\.less$/,
+              exclude: /src\/client\/app_react/,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'less-loader'
+              ),
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See https://github.com/webpack/webpack/issues/6571
+              sideEffects: true,
+            },
+            {
+              test: /\.css$/,
+              resourceQuery: /airbnb-date-library/,
+              loader: ['style-loader', 'css-loader'],
+            },
+            { test: /\.hbs$/, loader: 'handlebars-loader' },
+
+            /* ====================================================== */
+            /*                Edpuzzle Loaders - END                  */
+            /* ====================================================== */
+
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.

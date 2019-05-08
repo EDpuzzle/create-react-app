@@ -47,6 +47,8 @@ function getServedPath(appPackageJson) {
 }
 
 const moduleFileExtensions = [
+  'coffee', // Custom Edpuzzle extension
+  'hbs', // Custom Edpuzzle extension
   'web.mjs',
   'mjs',
   'web.js',
@@ -102,15 +104,23 @@ module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appHtml: resolveApp('../server/views/templates/layout_template.ejs'),
+  appIndexJs: resolveModule(resolveApp, 'app/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
+  appSrc: [
+    resolveApp('api'),
+    resolveApp('app'),
+    resolveApp('app_react'),
+    resolveApp('lib'),
+    resolveApp('ui'),
+    resolveApp('node_modules/p-queue'),
+    resolveApp('node_modules/iso-639-1'),
+  ],
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
-  proxySetup: resolveApp('src/setupProxy.js'),
+  testsSetup: resolveModule(resolveApp, 'tests/setup'),
+  proxySetup: resolveApp('setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
