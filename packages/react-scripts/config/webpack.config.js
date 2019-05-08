@@ -290,7 +290,7 @@ module.exports = function(webpackEnv) {
         /* ====================================================== */
 
         underscore: 'lodash',
-        backbone: paths.resolveApp('node_modules', 'backbone', 'backbone'),
+        backbone: paths.resolveApp('node_modules/backbone/backbone'),
         'jquery.ui.widget': paths.resolveApp(
           'node_modules',
           'blueimp-file-upload/js/vendor/jquery.ui.widget.js'
