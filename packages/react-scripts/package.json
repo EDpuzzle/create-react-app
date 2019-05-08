@@ -1,10 +1,10 @@
 {
-  "name": "edpuzzle-react-scripts",
+  "name": "@edpuzzle/react-scripts",
   "version": "3.0.0",
   "description": "Edpuzzle configuration and scripts for Create React App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
+    "url": "https://github.com/edpuzzle/create-react-app.git",
     "directory": "packages/react-scripts"
   },
   "license": "MIT",
@@ -12,7 +12,7 @@
     "node": ">=8.10"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/edpuzzle/create-react-app/issues"
   },
   "files": [
     "bin",
