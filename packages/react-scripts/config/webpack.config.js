@@ -519,7 +519,12 @@ module.exports = function(webpackEnv) {
             //       importLoaders: 2,
             //       sourceMap: isEnvProduction && shouldUseSourceMap,
             //     },
-            //     'sass-loader'
+            //     {
+            //		   loader: 'sass-loader',
+            //		   options: {
+            //		     includePaths: [paths.appPath]
+            //		   }
+            //	   }
             //   ),
             //   // Don't consider CSS imports dead code even if the
             //   // containing package claims to have no side effects.
@@ -538,7 +543,12 @@ module.exports = function(webpackEnv) {
                   modules: true,
                   getLocalIdent: getCSSModuleLocalIdent,
                 },
-                'sass-loader'
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    includePaths: [paths.appPath],
+                  },
+                }
               ),
             },
 
