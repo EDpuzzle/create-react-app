@@ -109,7 +109,7 @@ module.exports = {
   appHtml: resolveApp('../server/views/templates/layout_template.ejs'),
   appIndexJs: resolveModule(resolveApp, 'app/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('.'),
+  appSrc: resolveApp('./'),
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),

@@ -388,6 +388,42 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+
+            /* ====================================================== */
+            /*              Edpuzzle Loaders - START                  */
+            /* ====================================================== */
+
+            {
+              test: /\.coffee$/,
+              loader: 'coffee-loader',
+              exclude: /node_modules/,
+            },
+            {
+              test: /\.less$/,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 1,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'less-loader'
+              ),
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See https://github.com/webpack/webpack/issues/6571
+              sideEffects: true,
+            },
+            {
+              test: /\.css$/,
+              resourceQuery: /airbnb-date-library/,
+              loader: ['style-loader', 'css-loader'],
+            },
+            { test: /\.hbs$/, loader: 'handlebars-loader' },
+
+            /* ====================================================== */
+            /*                Edpuzzle Loaders - END                  */
+            /* ====================================================== */
+
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
@@ -551,44 +587,6 @@ module.exports = function(webpackEnv) {
                 }
               ),
             },
-
-            /* ====================================================== */
-            /*              Edpuzzle Loaders - START                  */
-            /* ====================================================== */
-
-            {
-              test: /\.coffee$/,
-              loader: 'coffee-loader',
-              exclude: /node_modules/,
-              include: __dirname,
-            },
-            {
-              test: /\.less$/,
-              exclude: /src\/client\/app_react/,
-              use: getStyleLoaders(
-                {
-                  importLoaders: 2,
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
-                },
-                'less-loader'
-              ),
-              // Don't consider CSS imports dead code even if the
-              // containing package claims to have no side effects.
-              // Remove this when webpack adds a warning or an error for this.
-              // See https://github.com/webpack/webpack/issues/6571
-              sideEffects: true,
-            },
-            {
-              test: /\.css$/,
-              resourceQuery: /airbnb-date-library/,
-              loader: ['style-loader', 'css-loader'],
-            },
-            { test: /\.hbs$/, loader: 'handlebars-loader' },
-
-            /* ====================================================== */
-            /*                Edpuzzle Loaders - END                  */
-            /* ====================================================== */
-
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
