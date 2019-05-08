@@ -123,12 +123,9 @@ module.exports = function(
   }
 
   // Copy the files for the user
-  // const templatePath = template
-  //   ? path.resolve(originalDirectory, template)
-  //   : path.join(ownPath, useTypeScript ? 'template-typescript' : 'template');
-
-  const templatePath = 'template-edpuzzle';
-
+  const templatePath = template
+    ? path.resolve(originalDirectory, template)
+    : path.join(ownPath, useTypeScript ? 'template-typescript' : 'template');
   if (fs.existsSync(templatePath)) {
     fs.copySync(templatePath, appPath);
   } else {
@@ -222,7 +219,9 @@ module.exports = function(
 
   console.log();
   console.log(`Success! Created ${appName} at ${appPath}`);
-  console.log(chalk.red('WELCOME TO EDPUZZLE'));
+  console.log();
+  console.log(chalk.red('EDPUZZLE: make any video your lesson'));
+  console.log();
   console.log('Inside that directory, you can run several commands:');
   console.log();
   console.log(chalk.cyan(`  ${displayedCommand} start`));
