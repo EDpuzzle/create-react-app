@@ -582,7 +582,7 @@ module.exports = function(webpackEnv) {
                 {
                   loader: 'sass-loader',
                   options: {
-                    includePaths: [paths.appPath],
+                    includePaths: [paths.ownPath],
                   },
                 }
               ),

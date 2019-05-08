@@ -49,6 +49,7 @@ function getServedPath(appPackageJson) {
 const moduleFileExtensions = [
   'coffee', // Custom Edpuzzle extension
   'hbs', // Custom Edpuzzle extension
+  'scss',
   'web.mjs',
   'mjs',
   'web.js',
